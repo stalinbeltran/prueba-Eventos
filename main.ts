@@ -37,18 +37,8 @@ class Demo{
 
 
     app.get('/msgrecibido', async (req, res) => {
-      console.log('query', req.query)
-        let query = req.query
-        let telefonocliente = query.telefonocliente
-        let telefono = query.telefono
-        
-        if(Demo.conversaciones.length == 0){
-            let c = new Conversacion(telefonocliente, telefono, 'ingresoDataUsuario')
-            Demo.conversaciones.push(c)
-        }
-        let conversacion = Demo.conversaciones[0]
-        let status = this.getStatus(conversacion)
-        myEmitter.emit(status, res, conversacion)
+        console.log('query', req.query)
+        myEmitter.emit('msgrecibido', res, req)         //ahora sólo emitimos el evento, y dejamos q listener se encargue de todo
     })
 
 
@@ -56,6 +46,7 @@ class Demo{
       console.log(`Gateway listening on port ${port}`)
     })
 
+    this.emisor.on('msgrecibido', this.mensajeRecibido)
   }
 
   getStatus = (c:Conversacion)=>{
@@ -82,6 +73,12 @@ class Demo{
         conversacion.status = 'ingresaNombres'      //esto permite que el control vuelva a esta función cuando llegue otro mensaje
         res.send('Esperando nombres')
         // .then(this.ingresaApellidos)
+        
+    }
+
+    
+    mensajeRecibido = (res, req)=>{
+        console.log('hemos recibido el mensaje');
         
     }
 
