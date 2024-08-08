@@ -14,17 +14,17 @@ class Demo {
     constructor() {
         const myEmitter = new events_1.default();
         myEmitter.on('ingresoDataUsuario', function (res, telefonocliente) {
-            let t = 'ingresoDataUsuario telefonocliente' + telefonocliente;
+            let t = 'ingresoDataUsuario telefonocliente' + telefonocliente + 'contador: ' + this.contador;
             console.log(t);
             res.send(t);
         });
         myEmitter.on('ingresoNombre', function (res, telefonocliente) {
-            let t = 'ingresoNombre telefonocliente' + telefonocliente;
+            let t = 'ingresoNombre telefonocliente' + telefonocliente + 'contador: ' + this.contador;
             console.log(t);
             res.send(t);
         });
         myEmitter.on('ingresoTelefono', function (res, telefonocliente) {
-            let t = 'ingresoTelefono telefonocliente' + telefonocliente;
+            let t = 'ingresoTelefono telefonocliente' + telefonocliente + 'contador: ' + this.contador;
             console.log(t);
             res.send(t);
         });
