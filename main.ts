@@ -24,8 +24,8 @@ class Demo{
     myEmitter.on('ingresoNombre', function (res, telefonocliente) {
         let t = 'ingresoNombre telefonocliente' + telefonocliente
         console.log(t);
-        res.send(t)
-        this.emit('ingresoDataUsuario', res, telefonocliente)     //al finalizar ingreso nombre, volvemos a ingresoDataUsuario
+        // res.send(t)
+        this.emit('ingresoDataUsuario', res, t)     //al finalizar ingreso nombre, volvemos a ingresoDataUsuario
     })
 
     myEmitter.on('ingresoTelefono', function (res, telefonocliente) {
