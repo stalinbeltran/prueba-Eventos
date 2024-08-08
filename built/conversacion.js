@@ -9,9 +9,5 @@ class Conversacion {
         this.telefonoCliente = telefonoCliente;
         this.status = status;
     }
-    setStatus = (status) => {
-        this.status = status;
-        console.log('status', this.status);
-    };
 }
 exports.default = Conversacion;

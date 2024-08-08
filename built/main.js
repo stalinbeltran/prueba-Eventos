@@ -20,7 +20,7 @@ class Demo {
         myEmitter.on('ingresoDataUsuario', function (res, conversacion) {
             let t = 'ingresoDataUsuario telefonocliente' + conversacion.status;
             console.log(t);
-            conversacion.setStatus('ingresoTelefono');
+            conversacion.status = 'ingresoTelefono';
             res.send(t);
         });
         myEmitter.on('ingresoNombre', function (res, conversacion) {
@@ -32,7 +32,7 @@ class Demo {
         myEmitter.on('ingresoTelefono', function (res, conversacion) {
             let t = 'ingresoTelefono telefonocliente' + conversacion.status;
             console.log(t);
-            conversacion.setStatus('ingresoNombre');
+            conversacion.status = 'ingresoNombre';
             res.send(t);
         });
         app.get('/msgrecibido', async (req, res) => {
