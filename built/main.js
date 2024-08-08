@@ -11,20 +11,23 @@ const app = (0, express_1.default)();
 const port = 4000;
 class Demo {
     contador = 0;
+    emisor;
     constructor() {
         const myEmitter = new events_1.default();
+        this.emisor = myEmitter;
         myEmitter.on('ingresoDataUsuario', function (res, telefonocliente) {
-            let t = 'ingresoDataUsuario telefonocliente' + telefonocliente + 'contador: ' + this.contador;
+            let t = 'ingresoDataUsuario telefonocliente' + telefonocliente;
             console.log(t);
             res.send(t);
         });
         myEmitter.on('ingresoNombre', function (res, telefonocliente) {
-            let t = 'ingresoNombre telefonocliente' + telefonocliente + 'contador: ' + this.contador;
+            let t = 'ingresoNombre telefonocliente' + telefonocliente;
             console.log(t);
             res.send(t);
+            this.emit('ingresoDataUsuario', res, telefonocliente); //al finalizar ingreso nombre, volvemos a ingresoDataUsuario
         });
         myEmitter.on('ingresoTelefono', function (res, telefonocliente) {
-            let t = 'ingresoTelefono telefonocliente' + telefonocliente + 'contador: ' + this.contador;
+            let t = 'ingresoTelefono telefonocliente' + telefonocliente;
             console.log(t);
             res.send(t);
         });
@@ -44,7 +47,8 @@ class Demo {
         switch (this.contador) {
             case 1: return "ingresoDataUsuario";
             case 2: return "ingresoNombre";
-            case 2: return "ingresoTelefono";
+            case 3: return "ingresoTelefono";
+            default: this.contador = 0;
         }
         return "ingresoDataUsuario";
     };
