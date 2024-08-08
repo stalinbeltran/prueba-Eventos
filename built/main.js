@@ -23,12 +23,7 @@ class Demo {
             conversacion.status = 'ingresoTelefono';
             res.send(t);
         });
-        myEmitter.on('ingresoNombre', function (res, conversacion) {
-            let t = 'ingresoNombre telefonocliente' + conversacion.status;
-            console.log(t);
-            // res.send(t)
-            this.emit('ingresoDataUsuario', res, conversacion); //al finalizar ingreso nombre, volvemos a ingresoDataUsuario
-        });
+        myEmitter.on('ingresoNombre', this.ingresoNombre);
         myEmitter.on('ingresoTelefono', function (res, conversacion) {
             let t = 'ingresoTelefono telefonocliente' + conversacion.status;
             console.log(t);
@@ -54,6 +49,20 @@ class Demo {
     }
     getStatus = (c) => {
         return c.status;
+    };
+    async ingresaNombres() {
+        console.log('Ingresando Nombres');
+    }
+    async ingresaApellidos() {
+        console.log('Ingresando apellidos');
+    }
+    async ingresaTitulo() {
+        console.log('Ingresando titulo');
+    }
+    ingresoNombre = async () => {
+        this.ingresaNombres()
+            .then(this.ingresaApellidos)
+            .then(this.ingresaTitulo);
     };
 }
 let demo = new Demo;
