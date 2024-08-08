@@ -1,7 +1,7 @@
 
 import EventEmitter from "events";
 import express from "express"
-import Conversacion from "conversacion";
+import Conversacion from "./conversacion";
 
 
 class MyEmitter extends EventEmitter {}
