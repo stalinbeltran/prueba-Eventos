@@ -28,7 +28,7 @@ class Demo{
         let t = 'ingresoNombre telefonocliente' + conversacion.status
         console.log(t);
         // res.send(t)
-        this.emit('ingresoDataUsuario', res, t)     //al finalizar ingreso nombre, volvemos a ingresoDataUsuario
+        this.emit('ingresoDataUsuario', res, conversacion)     //al finalizar ingreso nombre, volvemos a ingresoDataUsuario
     })
 
     myEmitter.on('ingresoTelefono', function (res, conversacion:Conversacion) {
