@@ -40,7 +40,11 @@ class Demo {
             let query = req.query;
             let telefonocliente = query.telefonocliente;
             let telefono = query.telefono;
-            let conversacion = new conversacion_1.default(telefonocliente, telefono, 'ingresoDataUsuario');
+            if (Demo.conversaciones.length == 0) {
+                let c = new conversacion_1.default(telefonocliente, telefono, 'ingresoDataUsuario');
+                Demo.conversaciones.push(c);
+            }
+            let conversacion = Demo.conversaciones[0];
             let status = this.getStatus(conversacion);
             myEmitter.emit(status, res, conversacion);
         });
@@ -49,10 +53,7 @@ class Demo {
         });
     }
     getStatus = (c) => {
-        if (Demo.conversaciones.length == 0)
-            Demo.conversaciones.push(c);
-        let conversacion = Demo.conversaciones[0];
-        return conversacion.status;
+        return c.status;
     };
 }
 let demo = new Demo;
