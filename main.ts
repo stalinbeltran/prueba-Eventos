@@ -24,7 +24,9 @@ class Demo{
         res.send(t)
     })
 
+    //listados de eventos disponibles, y funciones que los escuchan
     myEmitter.on('ingresoNombre', this.ingresoNombre)
+    myEmitter.on('ingresaNombres', this.ingresaNombres)
 
     myEmitter.on('ingresoTelefono', function (res, conversacion:Conversacion) {
         let t = 'ingresoTelefono telefonocliente' + conversacion.status
@@ -61,8 +63,9 @@ class Demo{
   }
 
     async ingresaNombres(res, conversacion:Conversacion){
-        console.log('Esperando Nombres')
-        res.send('Esperando nombres')
+        res.send('recibiendo nombres')       //respuesta simple a la página, para saber qué estamos haciendo
+        console.log(conversacion.status);
+        
     }
     
     async ingresaApellidos(res, conversacion:Conversacion){
@@ -76,7 +79,8 @@ class Demo{
     }
 
     ingresoNombre = async(res, conversacion:Conversacion)=>{
-        this.ingresaNombres(res, conversacion)
+        conversacion.status = 'ingresaNombres'      //esto permite que el control vuelva a esta función cuando llegue otro mensaje
+        res.send('Esperando nombres')
         // .then(this.ingresaApellidos)
         
     }
