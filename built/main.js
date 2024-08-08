@@ -12,7 +12,7 @@ const port = 4000;
 class Demo {
     constructor() {
         const myEmitter = new events_1.default();
-        myEmitter.on('event', (a, b) => {
+        myEmitter.on('event', function (a, b) {
             console.log(a, b, this);
             // Prints: a b {}
         });

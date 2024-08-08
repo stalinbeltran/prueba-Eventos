@@ -11,7 +11,7 @@ class Demo{
   constructor(){
 
     const myEmitter = new EventEmitter();
-    myEmitter.on('event', (a, b) => {
+    myEmitter.on('event', function (a, b) {
       console.log(a, b, this);
       // Prints: a b {}
     });
