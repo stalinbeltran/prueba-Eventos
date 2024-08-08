@@ -11,12 +11,12 @@ const app = (0, express_1.default)();
 const port = 4000;
 class Demo {
     constructor() {
-        const myEmitter = new MyEmitter();
+        const myEmitter = new events_1.default();
         myEmitter.on('event', (a, b) => {
             console.log(a, b, this);
             // Prints: a b {}
         });
-        myEmitter.emit('event', 'a', 'b');
+        myEmitter.emit('event', 'a', 'bar');
         app.get('/msgrecibido', async (req, res) => {
             console.log('query', req.query);
             res.send(req.query);
