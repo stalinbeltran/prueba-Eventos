@@ -10,13 +10,11 @@ class Demo {
     constructor() {
         app.get('/msgrecibido', async (req, res) => {
             console.log('query', req.query);
-        });
-        //Gateway ofrece webservice para enviar mensajes
-        app.get('/enviarmsg', async (req, res) => {
-            console.log('query', req.query);
+            res.send(req.query);
         });
         app.listen(port, () => {
             console.log(`Gateway listening on port ${port}`);
         });
     }
 }
+let demo = new Demo;

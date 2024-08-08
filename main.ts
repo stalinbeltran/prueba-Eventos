@@ -11,13 +11,7 @@ class Demo{
 
     app.get('/msgrecibido', async (req, res) => {
       console.log('query', req.query)
-
-    })
-
-    //Gateway ofrece webservice para enviar mensajes
-    app.get('/enviarmsg', async (req, res) => {
-      console.log('query', req.query)
-
+        res.send(req.query)
     })
 
 
@@ -29,3 +23,5 @@ class Demo{
 
 
 }
+
+let demo = new Demo
