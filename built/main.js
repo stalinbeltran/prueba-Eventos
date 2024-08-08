@@ -50,19 +50,21 @@ class Demo {
     getStatus = (c) => {
         return c.status;
     };
-    async ingresaNombres() {
-        console.log('Ingresando Nombres');
+    async ingresaNombres(res, conversacion) {
+        console.log('Esperando Nombres');
+        res.send('Esperando nombres');
     }
-    async ingresaApellidos() {
-        console.log('Ingresando apellidos');
+    async ingresaApellidos(res, conversacion) {
+        console.log('Esperando apellidos');
+        res.send('Esperando apellidos');
     }
-    async ingresaTitulo() {
-        console.log('Ingresando titulo');
+    async ingresaTitulo(res, conversacion) {
+        console.log('Esperando titulo');
+        res.send('Esperando titulo');
     }
-    ingresoNombre = async () => {
-        this.ingresaNombres()
-            .then(this.ingresaApellidos)
-            .then(this.ingresaTitulo);
+    ingresoNombre = async (res, conversacion) => {
+        this.ingresaNombres(res, conversacion);
+        // .then(this.ingresaApellidos)
     };
 }
 let demo = new Demo;
