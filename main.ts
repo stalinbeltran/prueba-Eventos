@@ -12,9 +12,24 @@ class Demo{
   constructor(){
 
     const myEmitter = new EventEmitter();
-    myEmitter.on('ingresoDataUsuario', function (telefonocliente) {
-      console.log('telefonocliente', telefonocliente);
-    });
+
+    myEmitter.on('ingresoDataUsuario', function (res, telefonocliente) {
+        let t = 'ingresoDataUsuario telefonocliente' + telefonocliente
+        console.log(t);
+        res.send(t)
+    })
+
+    myEmitter.on('ingresoNombre', function (res, telefonocliente) {
+        let t = 'ingresoNombre telefonocliente' + telefonocliente
+        console.log(t);
+        res.send(t)
+    })
+
+    myEmitter.on('ingresoTelefono', function (res, telefonocliente) {
+        let t = 'ingresoTelefono telefonocliente' + telefonocliente
+        console.log(t);
+        res.send(t)
+    })
 
 
     app.get('/msgrecibido', async (req, res) => {
@@ -22,10 +37,7 @@ class Demo{
         let query = req.query
         let telefonocliente = query.telefonocliente
         let status = this.getStatus(telefonocliente)
-        switch(status){
-            case 'ingresoDataUsuario':  myEmitter.emit('ingresoDataUsuario', telefonocliente); break
-        }
-        res.send(req.query)
+        myEmitter.emit(status, res, telefonocliente)
     })
 
 
@@ -39,7 +51,8 @@ class Demo{
         this.contador++
         switch(this.contador){
             case 1: return "ingresoDataUsuario"
-            case 2: return ""
+            case 2: return "ingresoNombre"
+            case 2: return "ingresoTelefono"
         }
     return "ingresoDataUsuario"
   }
