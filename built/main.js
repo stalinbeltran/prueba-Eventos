@@ -18,21 +18,21 @@ class Demo {
         const myEmitter = new events_1.default();
         this.emisor = myEmitter;
         myEmitter.on('ingresoDataUsuario', function (res, conversacion) {
-            let t = 'ingresoDataUsuario telefonocliente' + conversacion;
+            let t = 'ingresoDataUsuario telefonocliente' + conversacion.status;
             console.log(t);
-            conversacion.status = 'ingresoTelefono';
+            conversacion.setStatus('ingresoTelefono');
             res.send(t);
         });
         myEmitter.on('ingresoNombre', function (res, conversacion) {
-            let t = 'ingresoNombre telefonocliente' + conversacion;
+            let t = 'ingresoNombre telefonocliente' + conversacion.status;
             console.log(t);
             // res.send(t)
             this.emit('ingresoDataUsuario', res, t); //al finalizar ingreso nombre, volvemos a ingresoDataUsuario
         });
         myEmitter.on('ingresoTelefono', function (res, conversacion) {
-            let t = 'ingresoTelefono telefonocliente' + conversacion;
+            let t = 'ingresoTelefono telefonocliente' + conversacion.status;
             console.log(t);
-            conversacion.status = 'ingresoNombre';
+            conversacion.setStatus('ingresoNombre');
             res.send(t);
         });
         app.get('/msgrecibido', async (req, res) => {
