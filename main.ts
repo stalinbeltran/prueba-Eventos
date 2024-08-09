@@ -13,27 +13,27 @@ class Demo{
     status:string
 
 
-  constructor(){
-    const myEmitter = new EventEmitter();
-    this.emisor = myEmitter
+    constructor(){
+        const myEmitter = new EventEmitter();
+        this.emisor = myEmitter
 
-    app.get('/msgrecibido', async (req, res) => {
-        let msg = new Mensaje
-        msg.msg = req.query.msg
-        msg.numero = req.query.numero
-        msg.telefonoCliente = req.query.telefonocliente
-        res.send('hemos recibido el mensaje')
-        myEmitter.emit('msgrecibido', msg)         //ahora sólo emitimos el evento cuando llega el msg, y dejamos q listener de turno se encargue de todo
-    })
+        app.get('/msgrecibido', async (req, res) => {
+            let msg = new Mensaje
+            msg.msg = req.query.msg
+            msg.numero = req.query.numero
+            msg.telefonoCliente = req.query.telefonocliente
+            res.send('hemos recibido el mensaje')
+            myEmitter.emit('msgrecibido', msg)         //ahora sólo emitimos el evento cuando llega el msg, y dejamos q listener de turno se encargue de todo
+        })
 
 
-    app.listen(port, () => {
-      console.log(`Gateway listening on port ${port}`)
-    })
+        app.listen(port, () => {
+        console.log(`Gateway listening on port ${port}`)
+        })
 
-    this.ingresoNombre()
+        this.ingresoNombre()
 
-  }
+    }
 
 
     ingresaApellidos = ()=> {
