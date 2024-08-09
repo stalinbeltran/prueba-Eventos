@@ -50,11 +50,10 @@ class Bot {
         let found = this.conversaciones.find((element) => element.telefono == telefono); //lo buscamos en el arreglo de conversaciones
         if (!found) {
             let nombreEvento = this.getUUID(); //si no existe, agregamos nueva conversacion
-            let c = new conversacion_1.Conversacion(nombreEvento, telefono);
+            found = new conversacion_1.Conversacion(nombreEvento, telefono);
             this.iniciarTarea(nombreEvento); //creamos los listeners para esta conversacion
-            found = c;
             this.conversaciones.push(found);
-            return;
+            return; //en este caso, desperdiciamos el primer mensaje que llega
         }
         this.emisor.emit(found.nombreEvento, msg); //como hay un mensaje q no hemos atendido aún, emitimos el evento
     };

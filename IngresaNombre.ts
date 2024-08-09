@@ -4,7 +4,7 @@ import IngresaDato from './IngresaDato'
 
 class IngresaNombre extends IngresaDato{
 
-    ingresoNombre = async()=>{      
+    ingresoNombre = ()=>{      
         //aquí realizamos todas las acciones asíncronas que se requieren para ingreso de nombre
         //en el orden deseado
         return this.ingresaNombres()
