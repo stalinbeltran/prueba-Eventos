@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const events_1 = __importDefault(require("events"));
 const express_1 = __importDefault(require("express"));
 const conversacion_1 = require("./conversacion");
-const IngresaDato_1 = __importDefault(require("./IngresaDato"));
+const IngresaNombre_1 = __importDefault(require("./IngresaNombre"));
 const app = (0, express_1.default)();
 const port = 4000;
 class Demo {
@@ -29,38 +29,8 @@ class Demo {
         app.listen(port, () => {
             console.log(`Gateway listening on port ${port}`);
         });
-        this.ingresoNombre();
+        let n = new IngresaNombre_1.default(this.emisor);
+        n.ingresoNombre();
     }
-    ingresaApellidos = () => {
-        return new IngresaDato_1.default(this.emisor, () => {
-            console.log('-------por favor ingrese sus apellidos:');
-        }, () => {
-            console.log();
-            console.log('-------guardamos sus apellidos');
-        }).ingresa();
-    };
-    ingresaTitulo = () => {
-        let ingresa = new IngresaDato_1.default(this.emisor, () => {
-            console.log('-------por favor ingrese su titulo:');
-        }, (msg) => {
-            console.log(msg);
-            console.log('-------guardamos sus titulo');
-        });
-        return ingresa.ingresa();
-    };
-    ingresaNombres = () => {
-        let ingresa = new IngresaDato_1.default(this.emisor, () => {
-            console.log('-------por favor ingrese sus nombres:');
-        }, (msg) => {
-            console.log(msg);
-            console.log('-------guardamos sus nombres');
-        });
-        return ingresa.ingresa();
-    };
-    ingresoNombre = async () => {
-        this.ingresaNombres()
-            .then(this.ingresaApellidos)
-            .then(this.ingresaTitulo);
-    };
 }
 let demo = new Demo;
