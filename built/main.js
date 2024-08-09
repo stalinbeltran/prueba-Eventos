@@ -43,7 +43,7 @@ class Demo {
         console.log('por favor ingrese sus nombres');
     };
     ingresaNombresAfter = () => {
-        console.log('por favor ingrese sus nombres');
+        console.log('guardamos sus nombres');
     };
     ingresaNombres = () => { return this.resuelve(this.ingresaNombresBefore, this.ingresaNombresAfter); };
     ingresaApellidos = () => {
