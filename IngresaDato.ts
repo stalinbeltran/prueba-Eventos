@@ -4,9 +4,9 @@ import express from "express"
 import {Conversacion, Mensaje } from "./conversacion";
 
 class IngresaDato{
-    emisor:EventEmitter
-    before: () => void
-    after: (msg:Mensaje) => void
+    private emisor:EventEmitter
+    private before: () => void
+    private after: (msg:Mensaje) => void
 
     constructor(emisor, before: () => void, after: (msg:Mensaje) => void){
         this.emisor = emisor
@@ -14,7 +14,7 @@ class IngresaDato{
         this.after = after
     }
 
-    resuelve = (
+    private resuelve = (
         before: () => void, 
         after: (msg:Mensaje) => void
     )=> {
@@ -22,7 +22,7 @@ class IngresaDato{
             before()
             this.emisor.on('msgrecibido', function receptor(msg){
                 this.removeListener('msgrecibido', receptor)      //dejamos de esperar este evento
-                after(msg)                               //realizamos la accioin con el msg
+                after(msg)                               //realizamos la accion con el msg
                 resolve(0)                                                         //indicamos que podemos continuar con el sgte paso, sea cual sea
             })
         })

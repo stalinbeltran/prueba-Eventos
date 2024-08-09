@@ -18,9 +18,11 @@ class Demo {
         this.emisor = myEmitter;
         app.get('/msgrecibido', async (req, res) => {
             let msg = new conversacion_1.Mensaje;
+            //llenamos propiedades de msg con datos del request
             msg.msg = req.query.msg;
             msg.numero = req.query.numero;
             msg.telefonoCliente = req.query.telefonocliente;
+            //respondemos al request, para evitar que se quede esperando
             res.send('hemos recibido el mensaje');
             myEmitter.emit('msgrecibido', msg); //ahora sólo emitimos el evento cuando llega el msg, y dejamos q listener de turno se encargue de todo
         });
@@ -30,13 +32,12 @@ class Demo {
         this.ingresoNombre();
     }
     ingresaApellidos = () => {
-        let ingresa = new IngresaDato_1.default(this.emisor, () => {
+        return new IngresaDato_1.default(this.emisor, () => {
             console.log('-------por favor ingrese sus apellidos:');
         }, () => {
             console.log();
             console.log('-------guardamos sus apellidos');
-        });
-        return ingresa.ingresa();
+        }).ingresa();
     };
     ingresaTitulo = () => {
         let ingresa = new IngresaDato_1.default(this.emisor, () => {

@@ -14,7 +14,7 @@ class IngresaDato {
             before();
             this.emisor.on('msgrecibido', function receptor(msg) {
                 this.removeListener('msgrecibido', receptor); //dejamos de esperar este evento
-                after(msg); //realizamos la accioin con el msg
+                after(msg); //realizamos la accion con el msg
                 resolve(0); //indicamos que podemos continuar con el sgte paso, sea cual sea
             });
         });
