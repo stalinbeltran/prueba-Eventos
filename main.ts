@@ -21,8 +21,6 @@ class Demo{
         msg.msg = req.query.msg
         msg.numero = req.query.numero
         msg.telefonoCliente = req.query.telefonocliente
-        console.log('hemos recibido el mensaje');
-        console.log(msg);
         res.send('hemos recibido el mensaje')
         myEmitter.emit('msgrecibido', msg)         //ahora sólo emitimos el evento, y dejamos q listener se encargue de todo
     })
@@ -38,17 +36,13 @@ class Demo{
 
     ingresaNombres = (result:number)=> {
         let that = this
-
         return new Promise((resolve, reject) => {
             console.log('por favor ingrese sus nombres:');
-            // this.status = 'wait'
             that.emisor.on('msgrecibido', (msg)=>{
                 that.emisor.removeListener('msgrecibido', that.ingresaNombres)      //dejamos de esperar este evento
                 console.log('guardamos sus nombres');                               //realizamos la accioin con el msg
                 console.log(msg);
-                
                 resolve(87)                                                         //indicamos que podemos continuar con el sgte paso, sea cual sea
-                // this.status = 'ingresaApellidos'
             })
         })
     
