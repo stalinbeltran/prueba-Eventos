@@ -13,7 +13,7 @@ class IngresaTelefono {
         this.emisor = emisor;
     }
     ingreso = async () => {
-        this.ingresaTelefono();
+        return this.ingresaTelefono();
     };
     ingresaTelefono = () => {
         return new IngresaDato_1.default(this.emisor, () => {

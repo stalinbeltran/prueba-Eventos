@@ -16,7 +16,7 @@ class IngresaNombre{
 
 
     ingresoNombre = async()=>{      //aquí realizamos todas las acciones asíncronas que se requieren para ingreso de nombre
-        this.ingresaNombres()
+        return this.ingresaNombres()
         .then(this.ingresaApellidos)
         .then(this.ingresaTitulo)
     }

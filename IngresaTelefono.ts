@@ -16,7 +16,7 @@ class IngresaTelefono{
 
 
     ingreso = async()=>{      //aquí realizamos todas las acciones asíncronas que se requieren para ingreso de nombre
-        this.ingresaTelefono()
+        return this.ingresaTelefono()
     }
 
     private ingresaTelefono = ()=> {

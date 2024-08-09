@@ -13,7 +13,7 @@ class IngresaNombre {
         this.emisor = emisor;
     }
     ingresoNombre = async () => {
-        this.ingresaNombres()
+        return this.ingresaNombres()
             .then(this.ingresaApellidos)
             .then(this.ingresaTitulo);
     };
