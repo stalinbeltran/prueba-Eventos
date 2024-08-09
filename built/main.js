@@ -42,6 +42,7 @@ class Demo {
         return new Promise((resolve2, reject) => {
             setTimeout(() => {
                 console.log('nombres recibidos');
+                resolve2(6);
                 return result * 2;
             }, 1000);
         });

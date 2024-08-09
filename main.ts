@@ -50,6 +50,7 @@ class Demo{
             setTimeout(
                 ()=>{
                     console.log('nombres recibidos');
+                    resolve2(6)
                     return result * 2
                     
                 }
