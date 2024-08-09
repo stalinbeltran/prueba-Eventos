@@ -31,12 +31,6 @@ class Bot {
         app.listen(port, () => {
             console.log(`Gateway listening on port ${port}`);
         });
-        // //creamos a los trabajadores
-        // let n = new IngresaNombre(this.emisor)
-        // let t = new IngresaTelefono(this.emisor)
-        // //los llamamos en el orden deseado
-        // n.ingresoNombre()
-        // .then(t.ingresaTelefono)
         this.emisor.on('msgrecibido', this.distribuidor); //sólo distribuidor recibe msgrecibido
     }
     getUUID() {

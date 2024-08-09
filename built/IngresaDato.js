@@ -2,13 +2,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 class IngresaDato {
     emisor;
-    before;
-    after;
     nombreEvento;
-    constructor(emisor, nombreEvento, before, after) {
+    constructor(emisor, nombreEvento) {
         this.emisor = emisor;
-        this.before = before;
-        this.after = after;
         this.nombreEvento = nombreEvento;
     }
     resuelve = (before, after) => {
@@ -22,6 +18,6 @@ class IngresaDato {
             });
         });
     };
-    ingresa = () => { return this.resuelve(this.before, this.after); };
+    ingresa = (before, after) => { return this.resuelve(before, after); };
 }
 exports.default = IngresaDato;

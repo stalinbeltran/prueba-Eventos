@@ -6,23 +6,26 @@ import IngresaDato from './IngresaDato'
 class IngresaTelefono{
     private emisor:EventEmitter
     private nombreEvento:string
+    private ingresaDato:IngresaDato
 
     constructor(emisor:EventEmitter, nombreEvento:string){
         this.emisor = emisor
         this.nombreEvento = nombreEvento
-    }
-
-    ingresaTelefono = ()=> {
-        return new IngresaDato(
-            this.emisor, 
+        this.ingresaDato = new IngresaDato(
+            this.emisor,
             this.nombreEvento,
+        )
+    }
+    
+    ingresaTelefono = ()=> {
+        return this.ingresaDato.ingresa(
             ()=>{
                 console.log('-------por favor ingrese sus telefonos:')
             },
-            (msg:Mensaje)=>{
+            (msg)=>{
                 console.log('-------guardamos sus telefonos: ' + msg.numero)
-            },
-        ).ingresa()
+            }
+        )
     }
 
 }

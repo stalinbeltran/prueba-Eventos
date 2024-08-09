@@ -5,11 +5,16 @@ import IngresaDato from './IngresaDato'
 
 class IngresaNombre{
     private emisor:EventEmitter
-    nombreEvento:string
+    private nombreEvento:string
+    private ingresaDato:IngresaDato
 
     constructor(emisor:EventEmitter, nombreEvento:string){
         this.emisor = emisor
         this.nombreEvento = nombreEvento
+        this.ingresaDato = new IngresaDato(
+            this.emisor,
+            this.nombreEvento,
+        )
     }
 
 
@@ -20,43 +25,37 @@ class IngresaNombre{
     }
 
     private ingresaApellidos = ()=> {
-        return new IngresaDato(
-            this.emisor,
-            this.nombreEvento,
+        return this.ingresaDato.ingresa(
             ()=>{
                 console.log('-------por favor ingrese sus apellidos:')
             },
             (msg)=>{
                 console.log('-------guardamos sus apellidos: ' + msg.numero)
-            },
-        ).ingresa()
+            }
+        )
     }
 
     private ingresaTitulo = ()=> {
-        return new IngresaDato(
-            this.emisor, 
-            this.nombreEvento,
+        return this.ingresaDato.ingresa(
             ()=>{
-                console.log('-------por favor ingrese su titulo:')
+                console.log('-------por favor ingrese sus titulo:')
             },
             (msg)=>{
                 console.log('-------guardamos sus titulo: ' + msg.numero)
-            },
-        ).ingresa()
+            }
+        )
     }
 
 
     private ingresaNombres = () => {
-        return new IngresaDato(
-            this.emisor, 
-            this.nombreEvento,
+        return this.ingresaDato.ingresa(
             ()=>{
                 console.log('-------por favor ingrese sus nombres:')
             },
-            (msg:Mensaje)=>{
+            (msg)=>{
                 console.log('-------guardamos sus nombres: ' + msg.numero)
-            },
-        ).ingresa()
+            }
+        )
     }
 
 

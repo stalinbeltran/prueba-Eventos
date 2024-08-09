@@ -7,9 +7,11 @@ const IngresaDato_1 = __importDefault(require("./IngresaDato"));
 class IngresaNombre {
     emisor;
     nombreEvento;
+    ingresaDato;
     constructor(emisor, nombreEvento) {
         this.emisor = emisor;
         this.nombreEvento = nombreEvento;
+        this.ingresaDato = new IngresaDato_1.default(this.emisor, this.nombreEvento);
     }
     ingresoNombre = async () => {
         return this.ingresaNombres()
@@ -17,27 +19,25 @@ class IngresaNombre {
             .then(this.ingresaTitulo);
     };
     ingresaApellidos = () => {
-        return new IngresaDato_1.default(this.emisor, this.nombreEvento, () => {
+        return this.ingresaDato.ingresa(() => {
             console.log('-------por favor ingrese sus apellidos:');
         }, (msg) => {
             console.log('-------guardamos sus apellidos: ' + msg.numero);
-        }).ingresa();
+        });
     };
     ingresaTitulo = () => {
-        let ingresa = new IngresaDato_1.default(this.emisor, this.nombreEvento, () => {
-            console.log('-------por favor ingrese su titulo:');
+        return this.ingresaDato.ingresa(() => {
+            console.log('-------por favor ingrese sus titulo:');
         }, (msg) => {
             console.log('-------guardamos sus titulo: ' + msg.numero);
         });
-        return ingresa.ingresa();
     };
     ingresaNombres = () => {
-        let ingresa = new IngresaDato_1.default(this.emisor, this.nombreEvento, () => {
+        return this.ingresaDato.ingresa(() => {
             console.log('-------por favor ingrese sus nombres:');
         }, (msg) => {
             console.log('-------guardamos sus nombres: ' + msg.numero);
         });
-        return ingresa.ingresa();
     };
 }
 exports.default = IngresaNombre;

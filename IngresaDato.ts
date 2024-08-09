@@ -5,13 +5,9 @@ import { Mensaje } from "./conversacion";
 class IngresaDato{
     private emisor:EventEmitter
     private nombreEvento:string
-    private before: () => void
-    private after: (msg:Mensaje) => void
 
-    constructor(emisor, nombreEvento, before: () => void, after: (msg:Mensaje) => void){
+    constructor(emisor:EventEmitter, nombreEvento:string){
         this.emisor = emisor
-        this.before = before
-        this.after = after
         this.nombreEvento = nombreEvento
     }
 
@@ -31,7 +27,7 @@ class IngresaDato{
 
     }
 
-    ingresa = ()=>{ return this.resuelve(this.before, this.after)}
+    ingresa = (before: () => void, after: (msg:Mensaje) => void)=>{ return this.resuelve(before, after)}
 
 }
 

@@ -7,16 +7,18 @@ const IngresaDato_1 = __importDefault(require("./IngresaDato"));
 class IngresaTelefono {
     emisor;
     nombreEvento;
+    ingresaDato;
     constructor(emisor, nombreEvento) {
         this.emisor = emisor;
         this.nombreEvento = nombreEvento;
+        this.ingresaDato = new IngresaDato_1.default(this.emisor, this.nombreEvento);
     }
     ingresaTelefono = () => {
-        return new IngresaDato_1.default(this.emisor, this.nombreEvento, () => {
+        return this.ingresaDato.ingresa(() => {
             console.log('-------por favor ingrese sus telefonos:');
         }, (msg) => {
             console.log('-------guardamos sus telefonos: ' + msg.numero);
-        }).ingresa();
+        });
     };
 }
 exports.default = IngresaTelefono;
