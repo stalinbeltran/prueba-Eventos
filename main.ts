@@ -30,59 +30,59 @@ class Demo{
       console.log(`Gateway listening on port ${port}`)
     })
 
-    this.emisor.on('msgrecibido', this.mensajeRecibido)       //definimos el inicio/manejador del proceso
+    // this.emisor.on('msgrecibido', this.mensajeRecibido)       //definimos el inicio/manejador del proceso
+    this.ingresoNombre()
+
   }
 
 
-    ingresaNombres = (result:number)=> {
+  ingresaNombres = ()=> {
+    let that = this
+    return new Promise((resolve, reject) => {
+        console.log('por favor ingrese sus nombres:');
+        that.emisor.on('msgrecibido', (msg)=>{
+            that.emisor.removeListener('msgrecibido', that.ingresaNombres)      //dejamos de esperar este evento
+            console.log('guardamos sus nombres');                               //realizamos la accioin con el msg
+            resolve(87)                                                         //indicamos que podemos continuar con el sgte paso, sea cual sea
+        })
+    })
+
+}
+
+ingresaApellidos = ()=> {
         let that = this
         return new Promise((resolve, reject) => {
-            console.log('por favor ingrese sus nombres:');
+            console.log('por favor ingrese sus apellidos:');
             that.emisor.on('msgrecibido', (msg)=>{
-                that.emisor.removeListener('msgrecibido', that.ingresaNombres)      //dejamos de esperar este evento
-                console.log('guardamos sus nombres');                               //realizamos la accioin con el msg
-                console.log(msg);
+                that.emisor.removeListener('msgrecibido', that.ingresaApellidos)      //dejamos de esperar este evento
+                console.log('guardamos sus apellidos');                               //realizamos la accioin con el msg
                 resolve(87)                                                         //indicamos que podemos continuar con el sgte paso, sea cual sea
             })
         })
-    
-    }
-    
-    async ingresaApellidos(msg:Mensaje){
-        console.log('Esperando apellidos')
+
     }
 
-    async ingresaTitulo(msg:Mensaje){
-        console.log('Esperando titulo')
+    ingresaTitulo = ()=> {
+        let that = this
+        return new Promise((resolve, reject) => {
+            console.log('por favor ingrese su titulo:');
+            that.emisor.on('msgrecibido', (msg)=>{
+                that.emisor.removeListener('msgrecibido', that.ingresaTitulo)      //dejamos de esperar este evento
+                console.log('guardamos su titiulo');                               //realizamos la accioin con el msg
+                resolve(87)                                                         //indicamos que podemos continuar con el sgte paso, sea cual sea
+            })
+        })
+
     }
 
-    ingresoNombre = async(msg)=>{
-        new Promise(function(resolve, reject) {
 
-            setTimeout(() => resolve(1), 1000);
-          
-          }).then(this.ingresaNombres)
-          .then(function(result:number) { // (**)
-          
-            console.log(result); // 2
-          
-            return new Promise((resolve, reject) => {
-              setTimeout(() => resolve(result * 2), 1000);
-            });
-          
-          }).then(function(result:number) {
-          
-            console.log(result); // 4
-          
-          });
+
+    ingresoNombre = async()=>{
+        this.ingresaNombres()
+        .then(this.ingresaApellidos)
+        .then(this.ingresaTitulo)
     }
 
-    
-    mensajeRecibido = (msg:Mensaje)=>{
-        console.log('mensaje recibido funcion');
-        this.ingresoNombre(msg)                     //este se encarga de este proceso
-        
-    }
 
 }
 
