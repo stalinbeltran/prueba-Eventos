@@ -32,7 +32,8 @@ class Demo {
     ingresaApellidos = () => {
         let ingresa = new IngresaDato_1.default(this.emisor, () => {
             console.log('-------por favor ingrese sus apellidos:');
-        }, () => {
+        }, (msg) => {
+            console.log(msg);
             console.log('-------guardamos sus apellidos');
         });
         return ingresa.ingresa();
@@ -40,7 +41,8 @@ class Demo {
     ingresaTitulo = () => {
         let ingresa = new IngresaDato_1.default(this.emisor, () => {
             console.log('-------por favor ingrese su titulo:');
-        }, () => {
+        }, (msg) => {
+            console.log(msg);
             console.log('-------guardamos sus titulo');
         });
         return ingresa.ingresa();
@@ -48,7 +50,8 @@ class Demo {
     ingresaNombres = () => {
         let ingresa = new IngresaDato_1.default(this.emisor, () => {
             console.log('-------por favor ingrese sus nombres:');
-        }, () => {
+        }, (msg) => {
+            console.log(msg);
             console.log('-------guardamos sus nombres');
         });
         return ingresa.ingresa();

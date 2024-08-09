@@ -42,7 +42,8 @@ class Demo{
             ()=>{
                 console.log('-------por favor ingrese sus apellidos:')
             },
-            ()=>{
+            (msg)=>{
+                console.log(msg);
                 console.log('-------guardamos sus apellidos')
             },
         )
@@ -55,7 +56,8 @@ class Demo{
             ()=>{
                 console.log('-------por favor ingrese su titulo:')
             },
-            ()=>{
+            (msg)=>{
+                console.log(msg);
                 console.log('-------guardamos sus titulo')
             },
         )
@@ -69,7 +71,8 @@ class Demo{
             ()=>{
                 console.log('-------por favor ingrese sus nombres:')
             },
-            ()=>{
+            (msg)=>{
+                console.log(msg);
                 console.log('-------guardamos sus nombres')
             },
         )
