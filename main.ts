@@ -71,8 +71,8 @@ class Demo{
           
             console.log(result); // 1
           
-            return new Promise((resolve, reject) => { // (*)
-              setTimeout(() => resolve(result * 2), 1000);
+            return new Promise((resolve2, reject) => { // (*)
+              setTimeout(() => resolve2(result * 2), 1000);
             });
           
           }).then(function(result:number) { // (**)
