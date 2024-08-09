@@ -36,17 +36,28 @@ class Demo{
   }
 
 
-    ingresaNombres = ()=> {
+    resuelve = (before, after)=> {
         return new Promise((resolve, reject) => {
-            console.log('por favor ingrese sus nombres:');
+            before()
             this.emisor.on('msgrecibido', function receptor(msg){
                 this.removeListener('msgrecibido', receptor)      //dejamos de esperar este evento
-                console.log('guardamos sus nombres');                               //realizamos la accioin con el msg
-                resolve(87)                                                         //indicamos que podemos continuar con el sgte paso, sea cual sea
+                after(msg)                               //realizamos la accioin con el msg
+                resolve(0)                                                         //indicamos que podemos continuar con el sgte paso, sea cual sea
             })
         })
 
     }
+
+
+    ingresaNombresBefore = ()=> {
+        console.log('por favor ingrese sus nombres');        
+    }
+    
+    ingresaNombresAfter = ()=> {
+        console.log('por favor ingrese sus nombres');        
+    }
+
+    ingresaNombres = ()=>{ return this.resuelve(this.ingresaNombresBefore, this.ingresaNombresAfter)}
 
     ingresaApellidos = ()=> {
         return new Promise((resolve, reject) => {
