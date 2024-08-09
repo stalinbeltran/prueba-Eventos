@@ -36,27 +36,21 @@ class Demo{
   }
 
 
-    ingresaNombres(result:number) {
+    ingresaNombres = (result:number)=> {
         let that = this
-        console.log('por favor ingrese sus nombres:');
-        // this.status = 'wait'
-        // this.emisor.on('msgrecibido', (msg)=>{
-        //     console.log('guardamos sus nombres');
-        //     this.status = 'ingresaApellidos'
-        //     this.emisor.removeListener('msgrecibido', that.ingresaNombres)
-        // })
-    
-        return new Promise((resolve2, reject) => { // (*)
-            setTimeout(
-                ()=>{
-                    console.log('nombres recibidos');
-                    resolve2(6)
-                    return result * 2
-                    
-                }
-            , 1000);
-        }
-        )
+
+        return new Promise((resolve, reject) => {
+            console.log('por favor ingrese sus nombres:');
+            // this.status = 'wait'
+            that.emisor.on('msgrecibido', (msg)=>{
+                that.emisor.removeListener('msgrecibido', that.ingresaNombres)      //dejamos de esperar este evento
+                console.log('guardamos sus nombres');                               //realizamos la accioin con el msg
+                console.log(msg);
+                
+                resolve(87)                                                         //indicamos que podemos continuar con el sgte paso, sea cual sea
+                // this.status = 'ingresaApellidos'
+            })
+        })
     
     }
     
