@@ -1,5 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Mensaje = exports.Conversacion = void 0;
+class Mensaje {
+    msg;
+    telefonoCliente;
+    numero;
+}
+exports.Mensaje = Mensaje;
 class Conversacion {
     telefonoCliente;
     telefono;
@@ -10,4 +17,4 @@ class Conversacion {
         this.status = status;
     }
 }
-exports.default = Conversacion;
+exports.Conversacion = Conversacion;

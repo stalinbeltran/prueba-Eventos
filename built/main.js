@@ -5,63 +5,74 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const events_1 = __importDefault(require("events"));
 const express_1 = __importDefault(require("express"));
-class MyEmitter extends events_1.default {
-}
+const conversacion_1 = require("./conversacion");
 const app = (0, express_1.default)();
 const port = 4000;
 class Demo {
     contador = 0;
     emisor;
-    static conversaciones = [];
+    status;
     constructor() {
         const myEmitter = new events_1.default();
         this.emisor = myEmitter;
-        myEmitter.on('ingresoDataUsuario', function (res, conversacion) {
-            let t = 'ingresoDataUsuario telefonocliente' + conversacion.status;
-            console.log(t);
-            conversacion.status = 'ingresoTelefono';
-            res.send(t);
-        });
-        //listados de eventos disponibles, y funciones que los escuchan
-        myEmitter.on('ingresoNombre', this.ingresoNombre);
-        myEmitter.on('ingresaNombres', this.ingresaNombres);
-        myEmitter.on('ingresoTelefono', function (res, conversacion) {
-            let t = 'ingresoTelefono telefonocliente' + conversacion.status;
-            console.log(t);
-            conversacion.status = 'ingresoNombre';
-            res.send(t);
-        });
         app.get('/msgrecibido', async (req, res) => {
-            console.log('query', req.query);
-            myEmitter.emit('msgrecibido', res, req); //ahora sólo emitimos el evento, y dejamos q listener se encargue de todo
+            let msg = new conversacion_1.Mensaje;
+            msg.msg = req.query.msg;
+            msg.numero = req.query.numero;
+            msg.telefonoCliente = req.query.telefonocliente;
+            console.log('hemos recibido el mensaje');
+            console.log(msg);
+            res.send('hemos recibido el mensaje');
+            myEmitter.emit('msgrecibido', msg); //ahora sólo emitimos el evento, y dejamos q listener se encargue de todo
         });
         app.listen(port, () => {
             console.log(`Gateway listening on port ${port}`);
         });
-        this.emisor.on('msgrecibido', this.mensajeRecibido);
+        this.emisor.on('msgrecibido', this.mensajeRecibido); //definimos el inicio/manejador del proceso
     }
-    getStatus = (c) => {
-        return c.status;
-    };
-    async ingresaNombres(res, conversacion) {
-        res.send('recibiendo nombres'); //respuesta simple a la página, para saber qué estamos haciendo
-        console.log(conversacion.status);
+    async ingresaNombres(msg) {
+        let that = this;
+        // console.log(that);
+        console.log('por favor ingrese sus nombres:');
+        this.status = 'wait';
+        this.emisor.on('msgrecibido', (msg) => {
+            // console.log(msg);
+            console.log('guardamos sus nombres');
+            this.status = 'ingresaApellidos';
+            // console.log(that);
+            // console.log('that.ingresaNombres');
+            // console.log(that.ingresaNombres);
+            this.emisor.removeListener('msgrecibido', that.ingresaNombres);
+        });
     }
-    async ingresaApellidos(res, conversacion) {
+    async ingresaApellidos(msg) {
         console.log('Esperando apellidos');
-        res.send('Esperando apellidos');
     }
-    async ingresaTitulo(res, conversacion) {
+    async ingresaTitulo(msg) {
         console.log('Esperando titulo');
-        res.send('Esperando titulo');
     }
-    ingresoNombre = async (res, conversacion) => {
-        conversacion.status = 'ingresaNombres'; //esto permite que el control vuelva a esta función cuando llegue otro mensaje
-        res.send('Esperando nombres');
-        // .then(this.ingresaApellidos)
+    ingresoNombre = async (msg) => {
+        if (this.status == undefined)
+            this.status = 'ingresaNombres';
+        console.log('this.status');
+        console.log(this.status);
+        switch (this.status) {
+            case 'ingresaNombres':
+                this.ingresaNombres(msg);
+                break;
+            case 'ingresaApellidos':
+                this.ingresaApellidos(msg);
+                break;
+            case 'ingresaTitulo':
+                this.ingresaTitulo(msg);
+                break;
+        }
+        console.log('ingresoNombre');
+        console.log('por favor ingrese sus nombres:');
     };
-    mensajeRecibido = (res, req) => {
-        console.log('hemos recibido el mensaje');
+    mensajeRecibido = (msg) => {
+        console.log('mensaje recibido funcion');
+        this.ingresoNombre(msg); //este se encarga de este proceso
     };
 }
 let demo = new Demo;

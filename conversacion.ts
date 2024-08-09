@@ -1,4 +1,10 @@
 
+class Mensaje{
+    msg:string
+    telefonoCliente:string
+    numero:string
+}
+
 class Conversacion{
     telefonoCliente:string
     telefono:string
@@ -11,4 +17,4 @@ class Conversacion{
 
 }
 
-export default Conversacion
+export {Conversacion, Mensaje} 
