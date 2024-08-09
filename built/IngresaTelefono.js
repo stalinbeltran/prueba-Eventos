@@ -6,11 +6,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const IngresaDato_1 = __importDefault(require("./IngresaDato"));
 class IngresaTelefono {
     emisor;
-    constructor(emisor) {
+    nombreEvento;
+    constructor(emisor, nombreEvento) {
         this.emisor = emisor;
+        this.nombreEvento = nombreEvento;
     }
     ingresaTelefono = () => {
-        return new IngresaDato_1.default(this.emisor, () => {
+        return new IngresaDato_1.default(this.emisor, this.nombreEvento, () => {
             console.log('-------por favor ingrese sus telefonos:');
         }, (msg) => {
             console.log('-------guardamos sus telefonos');

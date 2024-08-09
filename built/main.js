@@ -14,10 +14,10 @@ const port = 4000;
 class Bot {
     emisor;
     status;
-    telefonos;
+    conversaciones;
     constructor() {
         this.emisor = new events_1.default();
-        this.telefonos = [];
+        this.conversaciones = [];
         app.get('/msgrecibido', async (req, res) => {
             let msg = new conversacion_1.Mensaje;
             //llenamos propiedades de msg con datos del request
@@ -37,20 +37,33 @@ class Bot {
         // //los llamamos en el orden deseado
         // n.ingresoNombre()
         // .then(t.ingresaTelefono)
+        this.emisor.on('msgrecibido', this.distribuidor); //sólo distribuidor recibe msgrecibido
         let myuuid = (0, uuid_1.v4)();
         console.log('Your UUID is: ' + myuuid);
     }
+    getUUID() {
+        let myuuid = (0, uuid_1.v4)();
+        return myuuid;
+    }
+    iniciarTarea(nombreEvento) {
+        //creamos a los trabajadores
+        let n = new IngresaNombre_1.default(this.emisor, nombreEvento);
+        let t = new IngresaTelefono_1.default(this.emisor, nombreEvento);
+        //los llamamos en el orden deseado
+        n.ingresoNombre()
+            .then(t.ingresaTelefono);
+    }
     distribuidor = (msg) => {
         let telefono = msg.numero;
-        const found = this.telefonos.find((element) => element == telefono);
+        let found = this.conversaciones.find((element) => element.telefono == telefono); //lo buscamos en el arreglo de conversaciones
         if (!found) {
-            //creamos a los trabajadores
-            let n = new IngresaNombre_1.default(this.emisor);
-            let t = new IngresaTelefono_1.default(this.emisor);
-            //los llamamos en el orden deseado
-            n.ingresoNombre()
-                .then(t.ingresaTelefono);
+            let nombreEvento = this.getUUID(); //si no existe, agregamos nueva conversacion
+            let c = new conversacion_1.Conversacion(nombreEvento, telefono);
+            this.iniciarTarea(nombreEvento); //creamos los listeners para esta conversacion
+            found = c;
+            this.conversaciones.push(found);
         }
+        this.emisor.emit(found.nombreEvento, msg); //como hay un mensaje q no hemos atendido aún, emitimos el evento
     };
 }
 let bot = new Bot;

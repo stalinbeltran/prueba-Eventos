@@ -6,11 +6,13 @@ class IngresaDato{
     private emisor:EventEmitter
     private before: () => void
     private after: (msg:Mensaje) => void
+    private nombreEvento:string
 
-    constructor(emisor, before: () => void, after: (msg:Mensaje) => void){
+    constructor(emisor, nombreEvento, before: () => void, after: (msg:Mensaje) => void){
         this.emisor = emisor
         this.before = before
         this.after = after
+        this.nombreEvento = nombreEvento
     }
 
     private resuelve = (
@@ -19,8 +21,8 @@ class IngresaDato{
     )=> {
         return new Promise((resolve, reject) => {
             before()
-            this.emisor.on('msgrecibido', function receptor(msg){
-                this.removeListener('msgrecibido', receptor)      //dejamos de esperar este evento
+            this.emisor.on(this.nombreEvento, function receptor(msg){
+                this.removeListener(this.nombreEvento, receptor)      //dejamos de esperar este evento
                 after(msg)                               //realizamos la accion con el msg
                 resolve(0)                                                         //indicamos que podemos continuar con el sgte paso, sea cual sea
             })

@@ -1,7 +1,7 @@
 
 import EventEmitter from "events";
 import express from "express"
-import { Mensaje } from "./conversacion";
+import { Conversacion, Mensaje } from "./conversacion";
 import IngresaNombre from "./IngresaNombre";
 import IngresaTelefono from "./IngresaTelefono";
 import {v4 as UUID} from 'uuid';
@@ -12,11 +12,11 @@ const port = 4000
 class Bot{
     emisor:EventEmitter
     status:string
-    telefonos:Array<string>
+    conversaciones:Array<Conversacion>
 
     constructor(){
         this.emisor = new EventEmitter();
-        this.telefonos = []
+        this.conversaciones = []
 
         app.get('/msgrecibido', async (req, res) => {       //alguien nos envía un msg, vía http
             let msg = new Mensaje
@@ -42,24 +42,35 @@ class Bot{
         // n.ingresoNombre()
         // .then(t.ingresaTelefono)
 
-
-        let myuuid = UUID();
-
-        console.log('Your UUID is: ' + myuuid);
+        this.emisor.on('msgrecibido', this.distribuidor)        //sólo distribuidor recibe msgrecibido
     }
 
-    distribuidor = (msg:Mensaje)=>{
-        let telefono = msg.numero
-        const found = this.telefonos.find((element) => element == telefono);
-        if(!found){
-            //creamos a los trabajadores
-            let n = new IngresaNombre(this.emisor)
-            let t = new IngresaTelefono(this.emisor)
+    private getUUID(){
+        let myuuid = UUID()
+        return myuuid
+    }
 
-            //los llamamos en el orden deseado
-            n.ingresoNombre()
-            .then(t.ingresaTelefono)
+    private iniciarTarea(nombreEvento:string){
+        //creamos a los trabajadores
+        let n = new IngresaNombre(this.emisor, nombreEvento)
+        let t = new IngresaTelefono(this.emisor, nombreEvento)
+
+        //los llamamos en el orden deseado
+        n.ingresoNombre()
+        .then(t.ingresaTelefono)
+    }
+
+    distribuidor = (msg:Mensaje)=>{                 //recibe todos los mensajes que llegan, y los distribuye a los eventos correspondientes
+        let telefono = msg.numero
+        let found = this.conversaciones.find((element) => element.telefono == telefono);     //lo buscamos en el arreglo de conversaciones
+        if(!found){
+            let nombreEvento = this.getUUID()                       //si no existe, agregamos nueva conversacion
+            let c = new Conversacion(nombreEvento, telefono)
+            this.iniciarTarea(nombreEvento)                         //creamos los listeners para esta conversacion
+            found = c
+            this.conversaciones.push(found)
         }
+        this.emisor.emit(found.nombreEvento, msg)                   //como hay un mensaje q no hemos atendido aún, emitimos el evento
     }
 
 

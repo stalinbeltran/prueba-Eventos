@@ -8,13 +8,11 @@ class Mensaje {
 }
 exports.Mensaje = Mensaje;
 class Conversacion {
-    telefonoCliente;
     telefono;
-    status;
-    constructor(telefonoCliente, telefono, status) {
+    nombreEvento;
+    constructor(nombreEvento, telefono) {
+        this.nombreEvento = nombreEvento;
         this.telefono = telefono;
-        this.telefonoCliente = telefonoCliente;
-        this.status = status;
     }
 }
 exports.Conversacion = Conversacion;

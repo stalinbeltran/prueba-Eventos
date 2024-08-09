@@ -6,13 +6,11 @@ class Mensaje{
 }
 
 class Conversacion{
-    telefonoCliente:string
     telefono:string
-    status:string
-    constructor(telefonoCliente, telefono, status){
+    nombreEvento:string
+    constructor(nombreEvento, telefono){
+        this.nombreEvento = nombreEvento
         this.telefono = telefono
-        this.telefonoCliente = telefonoCliente
-        this.status = status
     }
 
 }
