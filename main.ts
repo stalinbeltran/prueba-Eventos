@@ -42,8 +42,8 @@ class Demo{
             ()=>{
                 console.log('-------por favor ingrese sus apellidos:')
             },
-            (msg)=>{
-                console.log(msg);
+            ()=>{
+                console.log();
                 console.log('-------guardamos sus apellidos')
             },
         )

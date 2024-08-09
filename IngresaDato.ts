@@ -5,16 +5,19 @@ import {Conversacion, Mensaje } from "./conversacion";
 
 class IngresaDato{
     emisor:EventEmitter
-    before:Function
-    after:Function
+    before: () => void
+    after: (msg:Mensaje) => void
 
-    constructor(emisor, before, after){
+    constructor(emisor, before: () => void, after: (msg:Mensaje) => void){
         this.emisor = emisor
         this.before = before
         this.after = after
     }
 
-    resuelve = (before, after)=> {
+    resuelve = (
+        before: () => void, 
+        after: (msg:Mensaje) => void
+    )=> {
         return new Promise((resolve, reject) => {
             before()
             this.emisor.on('msgrecibido', function receptor(msg){

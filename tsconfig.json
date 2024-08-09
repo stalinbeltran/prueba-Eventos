@@ -4,6 +4,7 @@
         "allowJs": true,
         "baseUrl": "./",
         "module": "nodenext",
+        "strict": false,
         "moduleResolution": "nodenext",
         "target": "ESNext"
     },

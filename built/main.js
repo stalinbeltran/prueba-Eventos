@@ -32,8 +32,8 @@ class Demo {
     ingresaApellidos = () => {
         let ingresa = new IngresaDato_1.default(this.emisor, () => {
             console.log('-------por favor ingrese sus apellidos:');
-        }, (msg) => {
-            console.log(msg);
+        }, () => {
+            console.log();
             console.log('-------guardamos sus apellidos');
         });
         return ingresa.ingresa();
