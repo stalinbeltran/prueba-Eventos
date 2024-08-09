@@ -7,6 +7,7 @@ const events_1 = __importDefault(require("events"));
 const express_1 = __importDefault(require("express"));
 const conversacion_1 = require("./conversacion");
 const IngresaNombre_1 = __importDefault(require("./IngresaNombre"));
+const IngresaTelefono_1 = __importDefault(require("./IngresaTelefono"));
 const app = (0, express_1.default)();
 const port = 4000;
 class Demo {
@@ -30,7 +31,9 @@ class Demo {
             console.log(`Gateway listening on port ${port}`);
         });
         let n = new IngresaNombre_1.default(this.emisor);
+        let t = new IngresaTelefono_1.default(this.emisor);
         n.ingresoNombre();
+        t.ingreso();
     }
 }
 let demo = new Demo;

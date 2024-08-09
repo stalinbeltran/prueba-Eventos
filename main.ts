@@ -4,6 +4,7 @@ import express from "express"
 import {Conversacion, Mensaje } from "./conversacion";
 import IngresaDato from './IngresaDato'
 import IngresaNombre from "./IngresaNombre";
+import IngresaTelefono from "./IngresaTelefono";
 
 const app = express()
 const port = 4000
@@ -35,7 +36,9 @@ class Demo{
         })
 
         let n = new IngresaNombre(this.emisor)
+        let t = new IngresaTelefono(this.emisor)
         n.ingresoNombre()
+        t.ingreso()
     }
 
 
