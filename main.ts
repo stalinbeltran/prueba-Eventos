@@ -48,8 +48,8 @@ class Bot{
         let t = new IngresaTelefono(this.emisor, nombreEvento)
 
         //los llamamos en el orden deseado
-        n.ingresoNombre()
-        .then(t.ingresaTelefono)
+        t.ingresaTelefono()
+        .then(n.ingresoNombre)
     }
 
     distribuidor = (msg:Mensaje)=>{                 //recibe todos los mensajes que llegan, y los distribuye a los eventos correspondientes

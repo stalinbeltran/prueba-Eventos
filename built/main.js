@@ -42,8 +42,8 @@ class Bot {
         let n = new IngresaNombre_1.default(this.emisor, nombreEvento);
         let t = new IngresaTelefono_1.default(this.emisor, nombreEvento);
         //los llamamos en el orden deseado
-        n.ingresoNombre()
-            .then(t.ingresaTelefono);
+        t.ingresaTelefono()
+            .then(n.ingresoNombre);
     }
     distribuidor = (msg) => {
         let telefono = msg.numero;
