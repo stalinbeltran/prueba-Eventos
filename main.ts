@@ -40,8 +40,8 @@ class Demo{
     let that = this
     return new Promise((resolve, reject) => {
         console.log('por favor ingrese sus nombres:');
-        that.emisor.on('msgrecibido', (msg)=>{
-            that.emisor.removeListener('msgrecibido', that.ingresaNombres)      //dejamos de esperar este evento
+        that.emisor.on('msgrecibido', function receptor(msg){
+            that.emisor.removeListener('msgrecibido', receptor)      //dejamos de esperar este evento
             console.log('guardamos sus nombres');                               //realizamos la accioin con el msg
             resolve(87)                                                         //indicamos que podemos continuar con el sgte paso, sea cual sea
         })
