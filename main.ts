@@ -35,24 +35,29 @@ class Demo{
     this.emisor.on('msgrecibido', this.mensajeRecibido)       //definimos el inicio/manejador del proceso
   }
 
-    async ingresaNombres(msg){
-        let that = this
-        // console.log(that);
+
+        ingresaNombres(result:number) {
+            let that = this
+            console.log('por favor ingrese sus nombres:');
+            // this.status = 'wait'
+            // this.emisor.on('msgrecibido', (msg)=>{
+            //     console.log('guardamos sus nombres');
+            //     this.status = 'ingresaApellidos'
+            //     this.emisor.removeListener('msgrecibido', that.ingresaNombres)
+            // })
         
-        console.log('por favor ingrese sus nombres:');
-        this.status = 'wait'
-        this.emisor.on('msgrecibido', (msg)=>{
-            // console.log(msg);
-            console.log('guardamos sus nombres');
-            this.status = 'ingresaApellidos'
-            // console.log(that);
-            // console.log('that.ingresaNombres');
-            // console.log(that.ingresaNombres);
-            
-            this.emisor.removeListener('msgrecibido', that.ingresaNombres)
-        })
+            return new Promise((resolve2, reject) => { // (*)
+                setTimeout(() => resolve2(
+                    ()=>{
+                        console.log('nombres recibidos');
+                        return result * 2
+                        
+                    }
+                ), 1000);
+            }
+            )
         
-    }
+        }
     
     async ingresaApellidos(msg:Mensaje){
         console.log('Esperando apellidos')
@@ -67,15 +72,8 @@ class Demo{
 
             setTimeout(() => resolve(1), 1000);
           
-          }).then(function(result:number) {
-          
-            console.log(result); // 1
-          
-            return new Promise((resolve2, reject) => { // (*)
-              setTimeout(() => resolve2(result * 2), 1000);
-            });
-          
-          }).then(function(result:number) { // (**)
+          }).then(this.ingresaNombres)
+          .then(function(result:number) { // (**)
           
             console.log(result); // 2
           
