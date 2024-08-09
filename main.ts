@@ -37,11 +37,10 @@ class Demo{
 
 
   ingresaNombres = ()=> {
-    let that = this
     return new Promise((resolve, reject) => {
         console.log('por favor ingrese sus nombres:');
-        that.emisor.on('msgrecibido', function receptor(msg){
-            that.emisor.removeListener('msgrecibido', receptor)      //dejamos de esperar este evento
+        this.emisor.on('msgrecibido', function receptor(msg){
+            this.removeListener('msgrecibido', receptor)      //dejamos de esperar este evento
             console.log('guardamos sus nombres');                               //realizamos la accioin con el msg
             resolve(87)                                                         //indicamos que podemos continuar con el sgte paso, sea cual sea
         })
@@ -50,11 +49,10 @@ class Demo{
 }
 
 ingresaApellidos = ()=> {
-        let that = this
         return new Promise((resolve, reject) => {
             console.log('por favor ingrese sus apellidos:');
-            that.emisor.on('msgrecibido', function receptor(msg){
-                that.emisor.removeListener('msgrecibido', receptor)      //dejamos de esperar este evento
+            this.emisor.on('msgrecibido', function receptor(msg){
+                this.removeListener('msgrecibido', receptor)      //dejamos de esperar este evento
                 console.log('guardamos sus apellidos');                               //realizamos la accioin con el msg
                 resolve(87)                                                         //indicamos que podemos continuar con el sgte paso, sea cual sea
             })
@@ -63,11 +61,10 @@ ingresaApellidos = ()=> {
     }
 
     ingresaTitulo = ()=> {
-        let that = this
         return new Promise((resolve, reject) => {
             console.log('por favor ingrese su titulo:');
-            that.emisor.on('msgrecibido', function receptor(msg){
-                that.emisor.removeListener('msgrecibido', receptor)      //dejamos de esperar este evento
+            this.emisor.on('msgrecibido', function receptor(msg){
+                this.removeListener('msgrecibido', receptor)      //dejamos de esperar este evento
                 console.log('guardamos su titiulo');                               //realizamos la accioin con el msg
                 resolve(87)                                                         //indicamos que podemos continuar con el sgte paso, sea cual sea
             })
