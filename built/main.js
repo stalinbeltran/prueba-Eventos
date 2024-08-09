@@ -52,19 +52,16 @@ class Demo {
         console.log('Esperando titulo');
     }
     ingresoNombre = async (msg) => {
-        let promise = new Promise(function (resolve, reject) {
-            setTimeout(() => resolve(1), 1000);
-        });
-        promise.then(function (result) {
+        new Promise(function (resolve, reject) {
+            setTimeout(() => resolve(1), 1000); // (*)
+        }).then(function (result) {
             console.log(result); // 1
             return result * 2;
-        });
-        promise.then(function (result) {
-            console.log(result); // 1
+        }).then(function (result) {
+            console.log(result); // 2
             return result * 2;
-        });
-        promise.then(function (result) {
-            console.log(result); // 1
+        }).then(function (result) {
+            console.log(result); // 4
             return result * 2;
         });
     };

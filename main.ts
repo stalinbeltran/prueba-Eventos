@@ -63,23 +63,25 @@ class Demo{
     }
 
     ingresoNombre = async(msg)=>{
-        let promise = new Promise(function(resolve, reject) {
-            setTimeout(() => resolve(1), 1000);
-          });
+        new Promise(function(resolve, reject) {
+
+            setTimeout(() => resolve(1), 1000); // (*)
           
-          promise.then(function(result:number) {
+          }).then(function(result:number) { // (**)
+          
             console.log(result); // 1
             return result * 2;
-          });
           
-          promise.then(function(result:number) {
-            console.log(result); // 1
-            return result * 2;
-          });
+          }).then(function(result:number) { // (***)
           
-          promise.then(function(result:number) {
-            console.log(result); // 1
+            console.log(result); // 2
             return result * 2;
+          
+          }).then(function(result:number) {
+          
+            console.log(result); // 4
+            return result * 2;
+          
           });
     }
 
