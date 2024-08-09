@@ -53,8 +53,8 @@ ingresaApellidos = ()=> {
         let that = this
         return new Promise((resolve, reject) => {
             console.log('por favor ingrese sus apellidos:');
-            that.emisor.on('msgrecibido', (msg)=>{
-                that.emisor.removeListener('msgrecibido', that.ingresaApellidos)      //dejamos de esperar este evento
+            that.emisor.on('msgrecibido', function receptor(msg){
+                that.emisor.removeListener('msgrecibido', receptor)      //dejamos de esperar este evento
                 console.log('guardamos sus apellidos');                               //realizamos la accioin con el msg
                 resolve(87)                                                         //indicamos que podemos continuar con el sgte paso, sea cual sea
             })
@@ -66,8 +66,8 @@ ingresaApellidos = ()=> {
         let that = this
         return new Promise((resolve, reject) => {
             console.log('por favor ingrese su titulo:');
-            that.emisor.on('msgrecibido', (msg)=>{
-                that.emisor.removeListener('msgrecibido', that.ingresaTitulo)      //dejamos de esperar este evento
+            that.emisor.on('msgrecibido', function receptor(msg){
+                that.emisor.removeListener('msgrecibido', receptor)      //dejamos de esperar este evento
                 console.log('guardamos su titiulo');                               //realizamos la accioin con el msg
                 resolve(87)                                                         //indicamos que podemos continuar con el sgte paso, sea cual sea
             })
