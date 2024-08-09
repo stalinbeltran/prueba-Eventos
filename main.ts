@@ -69,6 +69,7 @@ class Bot{
             this.iniciarTarea(nombreEvento)                         //creamos los listeners para esta conversacion
             found = c
             this.conversaciones.push(found)
+            return
         }
         this.emisor.emit(found.nombreEvento, msg)                   //como hay un mensaje q no hemos atendido aún, emitimos el evento
     }

@@ -38,8 +38,6 @@ class Bot {
         // n.ingresoNombre()
         // .then(t.ingresaTelefono)
         this.emisor.on('msgrecibido', this.distribuidor); //sólo distribuidor recibe msgrecibido
-        let myuuid = (0, uuid_1.v4)();
-        console.log('Your UUID is: ' + myuuid);
     }
     getUUID() {
         let myuuid = (0, uuid_1.v4)();
@@ -62,6 +60,7 @@ class Bot {
             this.iniciarTarea(nombreEvento); //creamos los listeners para esta conversacion
             found = c;
             this.conversaciones.push(found);
+            return;
         }
         this.emisor.emit(found.nombreEvento, msg); //como hay un mensaje q no hemos atendido aún, emitimos el evento
     };
