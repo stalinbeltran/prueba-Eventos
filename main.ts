@@ -23,7 +23,7 @@ class Demo{
         msg.numero = req.query.numero
         msg.telefonoCliente = req.query.telefonocliente
         res.send('hemos recibido el mensaje')
-        myEmitter.emit('msgrecibido', msg)         //ahora sólo emitimos el evento, y dejamos q listener se encargue de todo
+        myEmitter.emit('msgrecibido', msg)         //ahora sólo emitimos el evento cuando llega el msg, y dejamos q listener de turno se encargue de todo
     })
 
 
@@ -31,34 +31,35 @@ class Demo{
       console.log(`Gateway listening on port ${port}`)
     })
 
-    // this.emisor.on('msgrecibido', this.mensajeRecibido)       //definimos el inicio/manejador del proceso
     this.ingresoNombre()
 
   }
 
 
     ingresaApellidos = ()=> {
-        return new Promise((resolve, reject) => {
-            console.log('por favor ingrese sus apellidos:');
-            this.emisor.on('msgrecibido', function receptor(msg){
-                this.removeListener('msgrecibido', receptor)      //dejamos de esperar este evento
-                console.log('guardamos sus apellidos');                               //realizamos la accioin con el msg
-                resolve(87)                                                         //indicamos que podemos continuar con el sgte paso, sea cual sea
-            })
-        })
-
+        let ingresa = new IngresaDato(
+            this.emisor, 
+            ()=>{
+                console.log('-------por favor ingrese sus apellidos:')
+            },
+            ()=>{
+                console.log('-------guardamos sus apellidos')
+            },
+        )
+        return ingresa.ingresa()
     }
 
     ingresaTitulo = ()=> {
-        return new Promise((resolve, reject) => {
-            console.log('por favor ingrese su titulo:');
-            this.emisor.on('msgrecibido', function receptor(msg){
-                this.removeListener('msgrecibido', receptor)      //dejamos de esperar este evento
-                console.log('guardamos su titiulo');                               //realizamos la accioin con el msg
-                resolve(87)                                                         //indicamos que podemos continuar con el sgte paso, sea cual sea
-            })
-        })
-
+        let ingresa = new IngresaDato(
+            this.emisor, 
+            ()=>{
+                console.log('-------por favor ingrese su titulo:')
+            },
+            ()=>{
+                console.log('-------guardamos sus titulo')
+            },
+        )
+        return ingresa.ingresa()
     }
 
 
@@ -75,7 +76,7 @@ class Demo{
         return ingresa.ingresa()
     }
 
-    ingresoNombre = async()=>{
+    ingresoNombre = async()=>{      //aquí realizamos todas las acciones asíncronas que se requieren para ingreso de nombre
         this.ingresaNombres()
         .then(this.ingresaApellidos)
         .then(this.ingresaTitulo)
