@@ -20,7 +20,7 @@ class IngresaTelefono{
                 console.log('-------por favor ingrese sus telefonos:')
             },
             (msg:Mensaje)=>{
-                console.log('-------guardamos sus telefonos')
+                console.log('-------guardamos sus telefonos: ' + msg.numero)
             },
         ).ingresa()
     }

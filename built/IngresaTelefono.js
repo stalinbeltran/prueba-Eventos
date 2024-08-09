@@ -15,7 +15,7 @@ class IngresaTelefono {
         return new IngresaDato_1.default(this.emisor, this.nombreEvento, () => {
             console.log('-------por favor ingrese sus telefonos:');
         }, (msg) => {
-            console.log('-------guardamos sus telefonos');
+            console.log('-------guardamos sus telefonos: ' + msg.numero);
         }).ingresa();
     };
 }
