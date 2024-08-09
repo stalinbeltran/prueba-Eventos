@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const events_1 = __importDefault(require("events"));
 const express_1 = __importDefault(require("express"));
 const conversacion_1 = require("./conversacion");
+const IngresaDato_1 = __importDefault(require("./IngresaDato"));
 const app = (0, express_1.default)();
 const port = 4000;
 class Demo {
@@ -29,23 +30,6 @@ class Demo {
         // this.emisor.on('msgrecibido', this.mensajeRecibido)       //definimos el inicio/manejador del proceso
         this.ingresoNombre();
     }
-    resuelve = (before, after) => {
-        return new Promise((resolve, reject) => {
-            before();
-            this.emisor.on('msgrecibido', function receptor(msg) {
-                this.removeListener('msgrecibido', receptor); //dejamos de esperar este evento
-                after(msg); //realizamos la accioin con el msg
-                resolve(0); //indicamos que podemos continuar con el sgte paso, sea cual sea
-            });
-        });
-    };
-    ingresaNombresBefore = () => {
-        console.log('por favor ingrese sus nombres');
-    };
-    ingresaNombresAfter = () => {
-        console.log('guardamos sus nombres');
-    };
-    ingresaNombres = () => { return this.resuelve(this.ingresaNombresBefore, this.ingresaNombresAfter); };
     ingresaApellidos = () => {
         return new Promise((resolve, reject) => {
             console.log('por favor ingrese sus apellidos:');
@@ -65,6 +49,14 @@ class Demo {
                 resolve(87); //indicamos que podemos continuar con el sgte paso, sea cual sea
             });
         });
+    };
+    ingresaNombres = () => {
+        let ingresa = new IngresaDato_1.default(this.emisor, () => {
+            console.log('-------por favor ingrese sus nombres:');
+        }, () => {
+            console.log('-------guardamos sus nombres');
+        });
+        return ingresa.ingresa();
     };
     ingresoNombre = async () => {
         this.ingresaNombres()

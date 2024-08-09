@@ -2,6 +2,7 @@
 import EventEmitter from "events";
 import express from "express"
 import {Conversacion, Mensaje } from "./conversacion";
+import IngresaDato from './IngresaDato'
 
 const app = express()
 const port = 4000
@@ -36,29 +37,6 @@ class Demo{
   }
 
 
-    resuelve = (before, after)=> {
-        return new Promise((resolve, reject) => {
-            before()
-            this.emisor.on('msgrecibido', function receptor(msg){
-                this.removeListener('msgrecibido', receptor)      //dejamos de esperar este evento
-                after(msg)                               //realizamos la accioin con el msg
-                resolve(0)                                                         //indicamos que podemos continuar con el sgte paso, sea cual sea
-            })
-        })
-
-    }
-
-
-    ingresaNombresBefore = ()=> {
-        console.log('por favor ingrese sus nombres');        
-    }
-    
-    ingresaNombresAfter = ()=> {
-        console.log('guardamos sus nombres');        
-    }
-
-    ingresaNombres = ()=>{ return this.resuelve(this.ingresaNombresBefore, this.ingresaNombresAfter)}
-
     ingresaApellidos = ()=> {
         return new Promise((resolve, reject) => {
             console.log('por favor ingrese sus apellidos:');
@@ -84,6 +62,18 @@ class Demo{
     }
 
 
+    ingresaNombres = () => {
+        let ingresa = new IngresaDato(
+            this.emisor, 
+            ()=>{
+                console.log('-------por favor ingrese sus nombres:')
+            },
+            ()=>{
+                console.log('-------guardamos sus nombres')
+            },
+        )
+        return ingresa.ingresa()
+    }
 
     ingresoNombre = async()=>{
         this.ingresaNombres()
