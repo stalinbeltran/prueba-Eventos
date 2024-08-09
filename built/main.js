@@ -40,10 +40,10 @@ class Demo {
         //     this.emisor.removeListener('msgrecibido', that.ingresaNombres)
         // })
         return new Promise((resolve2, reject) => {
-            setTimeout(() => resolve2(() => {
+            setTimeout(() => {
                 console.log('nombres recibidos');
                 return result * 2;
-            }), 1000);
+            }, 1000);
         });
     }
     async ingresaApellidos(msg) {
