@@ -4,9 +4,9 @@ import { Mensaje } from "./conversacion";
 
 class IngresaDato{
     private emisor:EventEmitter
+    private nombreEvento:string
     private before: () => void
     private after: (msg:Mensaje) => void
-    private nombreEvento:string
 
     constructor(emisor, nombreEvento, before: () => void, after: (msg:Mensaje) => void){
         this.emisor = emisor

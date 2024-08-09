@@ -13,7 +13,7 @@ class IngresaNombre{
     }
 
 
-    ingresoNombre = async()=>{      //aquí realizamos todas las acciones asíncronas que se requieren para ingreso de nombre
+    ingresoNombre = async()=>{      //aquí realizamos todas las acciones asíncronas que se requieren para ingreso de nombre, en el orden deseado
         return this.ingresaNombres()
         .then(this.ingresaApellidos)
         .then(this.ingresaTitulo)
@@ -33,7 +33,7 @@ class IngresaNombre{
     }
 
     private ingresaTitulo = ()=> {
-        let ingresa = new IngresaDato(
+        return new IngresaDato(
             this.emisor, 
             this.nombreEvento,
             ()=>{
@@ -42,13 +42,12 @@ class IngresaNombre{
             (msg)=>{
                 console.log('-------guardamos sus titulo: ' + msg.numero)
             },
-        )
-        return ingresa.ingresa()
+        ).ingresa()
     }
 
 
     private ingresaNombres = () => {
-        let ingresa = new IngresaDato(
+        return new IngresaDato(
             this.emisor, 
             this.nombreEvento,
             ()=>{
@@ -57,8 +56,7 @@ class IngresaNombre{
             (msg:Mensaje)=>{
                 console.log('-------guardamos sus nombres: ' + msg.numero)
             },
-        )
-        return ingresa.ingresa()
+        ).ingresa()
     }
 
 
