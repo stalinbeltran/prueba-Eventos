@@ -19,10 +19,11 @@ class IngresaDato{
         before: () => void, 
         after: (msg:Mensaje) => void
     )=> {
+        let that = this
         return new Promise((resolve, reject) => {
             before()
             this.emisor.on(this.nombreEvento, function receptor(msg){
-                this.removeListener(this.nombreEvento, receptor)      //dejamos de esperar este evento
+                this.removeListener(that.nombreEvento, receptor)      //dejamos de esperar este evento
                 after(msg)                               //realizamos la accion con el msg
                 resolve(0)                                                         //indicamos que podemos continuar con el sgte paso, sea cual sea
             })
