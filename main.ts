@@ -36,28 +36,28 @@ class Demo{
   }
 
 
-        ingresaNombres(result:number) {
-            let that = this
-            console.log('por favor ingrese sus nombres:');
-            // this.status = 'wait'
-            // this.emisor.on('msgrecibido', (msg)=>{
-            //     console.log('guardamos sus nombres');
-            //     this.status = 'ingresaApellidos'
-            //     this.emisor.removeListener('msgrecibido', that.ingresaNombres)
-            // })
-        
-            return new Promise((resolve2, reject) => { // (*)
-                setTimeout(() => resolve2(
-                    ()=>{
-                        console.log('nombres recibidos');
-                        return result * 2
-                        
-                    }
-                ), 1000);
-            }
-            )
-        
+    ingresaNombres(result:number) {
+        let that = this
+        console.log('por favor ingrese sus nombres:');
+        // this.status = 'wait'
+        // this.emisor.on('msgrecibido', (msg)=>{
+        //     console.log('guardamos sus nombres');
+        //     this.status = 'ingresaApellidos'
+        //     this.emisor.removeListener('msgrecibido', that.ingresaNombres)
+        // })
+    
+        return new Promise((resolve2, reject) => { // (*)
+            setTimeout(() => resolve2(
+                ()=>{
+                    console.log('nombres recibidos');
+                    return result * 2
+                    
+                }
+            ), 1000);
         }
+        )
+    
+    }
     
     async ingresaApellidos(msg:Mensaje){
         console.log('Esperando apellidos')
