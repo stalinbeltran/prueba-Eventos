@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const IngresaDato_1 = __importDefault(require("./IngresaDato"));
 class IngresaNombre extends IngresaDato_1.default {
-    ingresoNombre = async () => {
+    ingresoNombre = () => {
         //aquí realizamos todas las acciones asíncronas que se requieren para ingreso de nombre
         //en el orden deseado
         return this.ingresaNombres()

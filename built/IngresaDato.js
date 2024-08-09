@@ -7,7 +7,7 @@ class IngresaDato {
         this.emisor = emisor;
         this.nombreEvento = nombreEvento;
     }
-    resuelve = (before, after) => {
+    ingresa = (before, after) => {
         let that = this;
         return new Promise((resolve, reject) => {
             before();
@@ -18,6 +18,5 @@ class IngresaDato {
             });
         });
     };
-    ingresa = (before, after) => { return this.resuelve(before, after); };
 }
 exports.default = IngresaDato;

@@ -11,7 +11,7 @@ class IngresaDato{
         this.nombreEvento = nombreEvento
     }
 
-    private resuelve = (
+    ingresa = (
         before: () => void, 
         after: (msg:Mensaje) => void
     )=> {
@@ -26,8 +26,6 @@ class IngresaDato{
         })
 
     }
-
-    ingresa = (before: () => void, after: (msg:Mensaje) => void)=>{ return this.resuelve(before, after)}
 
 }
 
