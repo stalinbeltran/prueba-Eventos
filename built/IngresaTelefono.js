@@ -13,7 +13,6 @@ class IngresaTelefono {
         return new IngresaDato_1.default(this.emisor, () => {
             console.log('-------por favor ingrese sus telefonos:');
         }, (msg) => {
-            console.log();
             console.log('-------guardamos sus telefonos');
         }).ingresa();
     };

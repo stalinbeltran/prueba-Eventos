@@ -23,8 +23,8 @@ class IngresaNombre{
             ()=>{
                 console.log('-------por favor ingrese sus apellidos:')
             },
-            ()=>{
-                console.log('-------guardamos sus apellidos')
+            (msg)=>{
+                console.log('-------guardamos sus apellidos: ' + msg.numero)
             },
         ).ingresa()
     }
@@ -36,7 +36,7 @@ class IngresaNombre{
                 console.log('-------por favor ingrese su titulo:')
             },
             (msg)=>{
-                console.log('-------guardamos sus titulo')
+                console.log('-------guardamos sus titulo: ' + msg.numero)
             },
         )
         return ingresa.ingresa()
@@ -50,7 +50,7 @@ class IngresaNombre{
                 console.log('-------por favor ingrese sus nombres:')
             },
             (msg:Mensaje)=>{
-                console.log('-------guardamos sus nombres')
+                console.log('-------guardamos sus nombres: ' + msg.numero)
             },
         )
         return ingresa.ingresa()
