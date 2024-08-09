@@ -36,19 +36,19 @@ class Demo{
   }
 
 
-  ingresaNombres = ()=> {
-    return new Promise((resolve, reject) => {
-        console.log('por favor ingrese sus nombres:');
-        this.emisor.on('msgrecibido', function receptor(msg){
-            this.removeListener('msgrecibido', receptor)      //dejamos de esperar este evento
-            console.log('guardamos sus nombres');                               //realizamos la accioin con el msg
-            resolve(87)                                                         //indicamos que podemos continuar con el sgte paso, sea cual sea
+    ingresaNombres = ()=> {
+        return new Promise((resolve, reject) => {
+            console.log('por favor ingrese sus nombres:');
+            this.emisor.on('msgrecibido', function receptor(msg){
+                this.removeListener('msgrecibido', receptor)      //dejamos de esperar este evento
+                console.log('guardamos sus nombres');                               //realizamos la accioin con el msg
+                resolve(87)                                                         //indicamos que podemos continuar con el sgte paso, sea cual sea
+            })
         })
-    })
 
-}
+    }
 
-ingresaApellidos = ()=> {
+    ingresaApellidos = ()=> {
         return new Promise((resolve, reject) => {
             console.log('por favor ingrese sus apellidos:');
             this.emisor.on('msgrecibido', function receptor(msg){
