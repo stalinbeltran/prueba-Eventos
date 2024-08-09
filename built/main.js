@@ -32,8 +32,8 @@ class Demo {
         });
         let n = new IngresaNombre_1.default(this.emisor);
         let t = new IngresaTelefono_1.default(this.emisor);
-        n.ingresoNombre();
-        t.ingreso();
+        n.ingresoNombre()
+            .then(t.ingreso);
     }
 }
 let demo = new Demo;

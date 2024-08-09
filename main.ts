@@ -38,7 +38,7 @@ class Demo{
         let n = new IngresaNombre(this.emisor)
         let t = new IngresaTelefono(this.emisor)
         n.ingresoNombre()
-        t.ingreso()
+        .then(t.ingreso)
     }
 
 
