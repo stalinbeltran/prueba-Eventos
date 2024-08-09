@@ -1,11 +1,7 @@
 
 import EventEmitter from "events";
-import express from "express"
-import {Conversacion, Mensaje } from "./conversacion";
+import { Mensaje } from "./conversacion";
 import IngresaDato from './IngresaDato'
-
-const app = express()
-const port = 4000
 
 class IngresaNombre{
     private emisor:EventEmitter

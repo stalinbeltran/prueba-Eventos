@@ -1,7 +1,6 @@
 
 import EventEmitter from "events";
-import express from "express"
-import {Conversacion, Mensaje } from "./conversacion";
+import { Mensaje } from "./conversacion";
 
 class IngresaDato{
     private emisor:EventEmitter
